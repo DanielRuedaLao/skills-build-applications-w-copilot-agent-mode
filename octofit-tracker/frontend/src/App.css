@@ -340,3 +340,57 @@ h1, h2 { color: var(--ink); font-family: var(--display); font-weight: 700; lette
   .workout-card { padding: 17px; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+
+.auth-page { min-height: 100svh; display: grid; place-items: center; padding: 24px; background: repeating-linear-gradient(0deg, transparent 0 47px, #2b5c4306 48px), #eff4f0; }
+.auth-panel { width: min(100%, 560px); padding: clamp(24px, 5vw, 48px); border: 1px solid var(--line); border-radius: 5px; background: #fff; box-shadow: 0 18px 54px #1b3d2f10; animation: page-arrive 380ms ease both; }
+.auth-logo { width: 54px; height: 54px; margin-bottom: 25px; border: 2px solid var(--acid); border-radius: 50%; object-fit: cover; }
+.auth-panel .eyebrow { margin-bottom: 9px; }
+.auth-panel h1 { margin: 0; font: 700 34px/1.1 var(--display); }
+.auth-panel > .page-description { margin: 10px 0 24px; }
+.form-stack { display: grid; gap: 15px; }
+.form-stack label { display: grid; gap: 6px; color: #53665a; font-size: 10px; font-weight: 800; }
+.form-stack input, .form-stack select { width: 100%; min-width: 0; min-height: 41px; padding: 9px 10px; border: 1px solid #d4dfd5; border-radius: 3px; outline: 0; color: var(--ink); background: white; font: 12px var(--body); }
+.form-stack input:focus, .form-stack select:focus { border-color: #638c72; box-shadow: 0 0 0 3px #638c721a; }
+.form-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.primary-action { min-height: 40px; padding: 0 15px; border: 1px solid var(--pine); border-radius: 3px; color: #fff; background: var(--pine); font-size: 11px; font-weight: 800; white-space: nowrap; }
+.primary-action:hover:not(:disabled) { color: var(--pine); background: var(--acid); }
+.primary-action:disabled, .text-action:disabled { cursor: wait; opacity: .65; }
+.auth-form .primary-action { width: 100%; min-height: 45px; margin-top: 2px; }
+.auth-switch { margin: 20px 0 0; color: var(--muted); font-size: 11px; text-align: center; }
+.auth-switch button { padding: 0; border: 0; color: var(--pine); background: transparent; font-size: inherit; font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
+.form-error, .form-success { margin: 0; font-size: 11px; }
+.form-error { color: #a44737; }
+.form-success { color: #3a7655; }
+.collection-form, .profile-form { margin-bottom: 19px; padding: 20px; border: 1px solid var(--line); border-radius: 5px; background: #fff; }
+.form-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+.form-heading .eyebrow { margin: 0 0 5px; }
+.form-heading h2 { margin: 0; font-size: 17px; }
+.profile-form { width: min(100%, 720px); gap: 19px; padding: 24px; }
+.profile-identity { display: flex; align-items: center; gap: 12px; padding-bottom: 17px; border-bottom: 1px solid var(--line); }
+.profile-identity > div { display: grid; gap: 3px; }
+.profile-identity strong { color: var(--ink); font-size: 13px; }
+.profile-identity small { color: var(--muted); font-size: 10px; }
+.topbar-actions { display: flex; align-items: center; gap: 15px; }
+.topbar-user { max-width: 150px; overflow: hidden; color: var(--pine); font-size: 10px; font-weight: 750; text-overflow: ellipsis; text-decoration: none; white-space: nowrap; }
+.sign-out-action { padding: 6px 9px; border: 1px solid #cbd9cd; border-radius: 3px; color: #53685b; background: transparent; font-size: 9px; font-weight: 800; }
+.sign-out-action:hover { border-color: var(--pine); color: var(--pine); background: #f2f7f1; }
+.team-actions { display: grid; justify-items: center; gap: 8px; }
+.joined-label { color: #4b7b5f; font: 8px var(--mono); }
+.team-actions .text-action { white-space: nowrap; }
+.team-stamp { grid-row: 2; }
+@media (max-width: 680px) {
+  .auth-page { padding: 14px; }
+  .auth-panel { padding: 24px 19px; }
+  .form-pair { grid-template-columns: 1fr; }
+  .collection-form { padding: 15px 13px; }
+  .form-heading { align-items: flex-start; }
+  .form-heading .primary-action { align-self: center; }
+  .activity-form-fields { grid-template-columns: 1fr 1fr; }
+  .activity-form-fields label:first-child { grid-column: 1 / -1; }
+  .profile-form { padding: 18px 14px; }
+  .topbar-actions { gap: 8px; }
+  .topbar-user { max-width: 80px; }
+  .live-status { display: none; }
+  .team-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; grid-column: 2; grid-row: 2; }
+  .team-actions .team-stamp { display: none; }
+}

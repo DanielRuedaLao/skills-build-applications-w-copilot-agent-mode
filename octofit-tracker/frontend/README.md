@@ -1,6 +1,6 @@
-# Octofit presentation tier
+# Octofit Tracker frontend
 
-React 19, Vite and React Router presentation tier for Octofit Tracker.
+React 19, Vite, React Router and Bootstrap presentation tier. For full setup, demo accounts, and API routes, see [the application guide](../README.md).
 
 ## Run locally
 
@@ -9,12 +9,4 @@ npm install --prefix octofit-tracker/frontend
 npm run dev --prefix octofit-tracker/frontend
 ```
 
-## API URL
-
-In Codespaces, define `VITE_CODESPACE_NAME` in `octofit-tracker/frontend/.env.local`:
-
-```dotenv
-VITE_CODESPACE_NAME=your-codespace-name
-```
-
-The API base is `https://<VITE_CODESPACE_NAME>-8000.app.github.dev/api`. Restart Vite after editing `.env.local`. If unset, the frontend uses `http://localhost:8000/api`. The backend must be running on port `8000`.
+The frontend uses `http://localhost:8000/api` by default. In Codespaces, set `VITE_CODESPACE_NAME` in `octofit-tracker/frontend/.env.local` to the Codespace name; the client will use `https://<name>-8000.app.github.dev/api`. Restart Vite after changing the file. The backend must be available on port `8000`.

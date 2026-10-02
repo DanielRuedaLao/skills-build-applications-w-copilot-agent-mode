@@ -2,12 +2,12 @@ import { useCollection } from '../hooks/useCollection.js'
 import PageHeading from './PageHeading.jsx'
 import ResourceState from './ResourceState.jsx'
 
-function Workouts() {
-  const { items: workouts, status, error, retry } = useCollection('workouts')
+function Workouts({ user }) {
+  const { items: workouts, status, error, retry } = useCollection('workouts/recommended')
   return (
     <section className="resource-page" aria-labelledby="workouts-title">
-      <PageHeading id="workouts-title" index="05" title="Workout library" description="Sessions for building strength, stamina and consistency." count={workouts.length} noun="PLANS" />
-      <ResourceState status={status} error={error} retry={retry} empty={!workouts.length} emptyTitle="Library is empty" emptyMessage="Workouts added to the API will be listed here.">
+      <PageHeading id="workouts-title" index="05" title="For your next session" description={`Picked for your ${user.fitnessLevel || 'beginner'} level and ${String(user.goal || 'general-fitness').replaceAll('-', ' ')} goal.`} count={workouts.length} noun="MATCHES" />
+      <ResourceState status={status} error={error} retry={retry} empty={!workouts.length} emptyTitle="No matches yet" emptyMessage="There are no workouts for this combination. Try adjusting your fitness level or goal in your profile.">
         <div className="workout-grid">{workouts.map((workout, index) => {
           const exercises = Array.isArray(workout.exercises) ? workout.exercises : []
           return <article className="workout-card" key={workout._id || workout.id || workout.name || index}>

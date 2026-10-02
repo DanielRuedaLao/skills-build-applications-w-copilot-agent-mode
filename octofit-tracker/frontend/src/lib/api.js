@@ -4,8 +4,31 @@ export const API_BASE_URL = codespaceName
   ? `https://${codespaceName}-8000.app.github.dev/api`
   : 'http://localhost:8000/api'
 
+export const SESSION_KEY = 'octofit-token'
+
 export function resourceUrl(resource) {
-  return `${API_BASE_URL}/${resource}/`
+  return `${API_BASE_URL}/${resource}`
+}
+
+export async function requestApi(path, options = {}) {
+  const headers = new Headers(options.headers)
+  headers.set('Accept', 'application/json')
+
+  if (options.body && !headers.has('Content-Type')) {
+    headers.set('Content-Type', 'application/json')
+  }
+
+  const token = localStorage.getItem(SESSION_KEY)
+  if (token) headers.set('Authorization', `Bearer ${token}`)
+
+  const response = await fetch(`${API_BASE_URL}${path}`, { ...options, headers })
+  const payload = await response.json().catch(() => null)
+  if (!response.ok) {
+    const error = new Error(payload?.error || `Request failed (${response.status})`)
+    error.status = response.status
+    throw error
+  }
+  return payload
 }
 
 function normalizeCollection(payload) {
@@ -19,10 +42,5 @@ function normalizeCollection(payload) {
 }
 
 export async function fetchCollection(resource, signal) {
-  const response = await fetch(resourceUrl(resource), {
-    headers: { Accept: 'application/json' },
-    signal
-  })
-  if (!response.ok) throw new Error(`Request failed (${response.status})`)
-  return normalizeCollection(await response.json())
+  return normalizeCollection(await requestApi(`/${resource}`, { signal }))
 }

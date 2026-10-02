@@ -9,6 +9,9 @@ export const User = model(
       username: { type: String, required: true, trim: true, unique: true },
       email: { type: String, required: true, trim: true, lowercase: true, unique: true },
       displayName: { type: String, trim: true },
+      passwordHash: { type: String, required: true, select: false },
+      fitnessLevel: { type: String, enum: ['beginner', 'intermediate', 'advanced'], default: 'beginner' },
+      goal: { type: String, enum: ['general-fitness', 'cardio', 'strength', 'mobility'], default: 'general-fitness' },
       points: { type: Number, default: 0, min: 0 }
     },
     options
@@ -21,7 +24,8 @@ export const Team = model(
     {
       name: { type: String, required: true, trim: true, unique: true },
       description: { type: String, trim: true },
-      members: [{ type: Schema.Types.ObjectId, ref: 'User' }]
+      members: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+      createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true }
     },
     options
   )
@@ -60,6 +64,7 @@ export const Workout = model(
       name: { type: String, required: true, trim: true },
       description: { type: String, trim: true },
       difficulty: { type: String, enum: ['beginner', 'intermediate', 'advanced'], default: 'beginner' },
+      goals: [{ type: String, enum: ['general-fitness', 'cardio', 'strength', 'mobility'] }],
       exercises: [{ name: { type: String, required: true }, sets: Number, reps: Number }]
     },
     options

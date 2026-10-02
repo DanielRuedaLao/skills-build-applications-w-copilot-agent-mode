@@ -9,14 +9,15 @@ function Users() {
       <PageHeading id="users-title" index="01" title="People" description="Athletes keeping the team moving." count={users.length} noun="ATHLETES" />
       <ResourceState status={status} error={error} retry={retry} empty={!users.length} emptyTitle="No athletes yet" emptyMessage="Users will appear here once they join Octofit.">
         <div className="table-surface"><table className="data-table">
-          <thead><tr><th>ATHLETE</th><th>EMAIL</th><th>POINTS</th><th>PROFILE</th></tr></thead>
+          <thead><tr><th>ATHLETE</th><th>POINTS</th><th>FITNESS LEVEL</th><th>TRAINING GOAL</th></tr></thead>
           <tbody>{users.map((user, index) => {
             const name = user.displayName || user.username || 'Octofit athlete'
             return (
               <tr key={user._id || user.id || user.email || index}>
                 <td><div className="person-cell"><span className={`avatar avatar-tone-${index % 3}`} aria-hidden="true">{name.slice(0, 1).toUpperCase()}</span><span className="person-name"><strong>{name}</strong><small>@{user.username || 'member'}</small></span></div></td>
-                <td>{user.email || '—'}</td><td><span className="points-value">{Number(user.points || 0).toLocaleString()}</span></td>
-                <td><span className="table-index">ATHLETE {String(index + 1).padStart(2, '0')}</span></td>
+                <td><span className="points-value">{Number(user.points || 0).toLocaleString()}</span></td>
+                <td><span className="table-index">{user.fitnessLevel || 'beginner'}</span></td>
+                <td><span className="table-index">{String(user.goal || 'general-fitness').replaceAll('-', ' ')}</span></td>
               </tr>
             )
           })}</tbody>

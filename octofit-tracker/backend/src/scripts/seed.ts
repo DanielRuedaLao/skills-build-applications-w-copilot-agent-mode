@@ -1,3 +1,4 @@
+import bcrypt from 'bcryptjs';
 import mongoose, { type Model } from 'mongoose';
 import { Activity, LeaderboardEntry, Team, User, Workout } from '../models/index.js';
 
@@ -29,23 +30,26 @@ async function seedDatabase() {
     console.log('Connected to octofit_db');
     console.log('Seed the octofit_db database with test data');
 
+    const demoPasswordHash = await bcrypt.hash('Octofit2026!', 12);
     const users = [
-      { _id: userIds[0], username: 'ava_runs', email: 'ava@example.com', displayName: 'Ava Chen', points: 920 },
-      { _id: userIds[1], username: 'noah_cycles', email: 'noah@example.com', displayName: 'Noah Patel', points: 760 },
-      { _id: userIds[2], username: 'mia_swims', email: 'mia@example.com', displayName: 'Mia Garcia', points: 680 }
+      { _id: userIds[0], username: 'ava_runs', email: 'ava@example.com', displayName: 'Ava Chen', passwordHash: demoPasswordHash, fitnessLevel: 'intermediate', goal: 'cardio', points: 920 },
+      { _id: userIds[1], username: 'noah_cycles', email: 'noah@example.com', displayName: 'Noah Patel', passwordHash: demoPasswordHash, fitnessLevel: 'intermediate', goal: 'strength', points: 760 },
+      { _id: userIds[2], username: 'mia_swims', email: 'mia@example.com', displayName: 'Mia Garcia', passwordHash: demoPasswordHash, fitnessLevel: 'beginner', goal: 'cardio', points: 680 }
     ];
     const teams = [
       {
         _id: new mongoose.Types.ObjectId('650000000000000000000101'),
         name: 'Trail Blazers',
         description: 'Weekend runners building consistency together.',
-        members: [userIds[0], userIds[1]]
+        members: [userIds[0], userIds[1]],
+        createdBy: userIds[0]
       },
       {
         _id: new mongoose.Types.ObjectId('650000000000000000000102'),
         name: 'Wave Riders',
         description: 'A friendly team focused on swimming and recovery.',
-        members: [userIds[2]]
+        members: [userIds[2]],
+        createdBy: userIds[2]
       }
     ];
     const activities = [
@@ -86,6 +90,7 @@ async function seedDatabase() {
         name: 'Easy Run Builder',
         description: 'A steady session to build aerobic endurance.',
         difficulty: 'beginner',
+        goals: ['cardio', 'general-fitness'],
         exercises: [{ name: 'Easy run', sets: 1, reps: 30 }]
       },
       {
@@ -93,6 +98,7 @@ async function seedDatabase() {
         name: 'Full Body Strength',
         description: 'A balanced strength session for active recovery days.',
         difficulty: 'intermediate',
+        goals: ['strength', 'general-fitness'],
         exercises: [
           { name: 'Squats', sets: 3, reps: 10 },
           { name: 'Push-ups', sets: 3, reps: 8 },
@@ -104,6 +110,7 @@ async function seedDatabase() {
         name: 'Pool Intervals',
         description: 'Short intervals with easy recovery lengths.',
         difficulty: 'advanced',
+        goals: ['cardio'],
         exercises: [{ name: 'Freestyle intervals', sets: 6, reps: 100 }]
       }
     ];

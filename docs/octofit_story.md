@@ -31,10 +31,12 @@ Together, Paul and the IT team identified key requirements for OctoFit Tracker:
 
 Paul and Jessica have set up a GitHub Codespace environment and are making remarkable progress with GitHub Copilot agent mode. The OctoFit Tracker prototype will include:
 
-- A functional user registration system
-- Basic activity logging for running, walking, and strength training
-- The beginning framework for team competitions
-- A simple dashboard showing student progress
+The OctoFit Tracker application includes:
+- User registration, sign-in, and editable fitness profiles
+- Activity logging for running, walking, cycling, swimming, strength training, and yoga
+- Team creation and membership
+- A points-based all-time leaderboard
+- Workout suggestions based on fitness level and goal
 
 ## Next Steps for Paul
 
@@ -88,8 +90,8 @@ In this workshop, you'll:
 
 We'll be using a modern web application stack:
 
-- **Frontend**: React.js
-- **Backend**: Python with Django REST API Framework
+- **Frontend**: React 19 with Vite, React Router, and Bootstrap
+- **Backend**: Node.js with Express and TypeScript
 - **Database**: MongoDB
 - **Development Environment**: GitHub Codespaces
 
@@ -106,7 +108,7 @@ We'll be using a modern web application stack:
 3. **Rapid Prototyping with GitHub Copilot agent mode**
    - Creating project structure
    - Generating boilerplate code
-   - Implementing basic models, serializers, urls, and views
+   - Implementing Mongoose models, Express routes, and API middleware
 
 4. **Building Core Features**
    - Activity logging and tracking
@@ -118,5 +120,5 @@ We'll be using a modern web application stack:
    - Setting up React components
    - Implementing responsive UI
    - Connecting to backend APIs
-   - Python Django business logic
+   - TypeScript and Express business logic
    - MongoDB data layer
